@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<htmllang="ja">
+
+<head>
+  <meta charset="utf-8">
+
+</head>
+
+<body>
+    <h1>👌に反応してページが変わる</h1>
+    <a href="/mediapipe02.html">前のページへ戻る</a>
+
+    <p>
+      <span id="press-button">0</span>回
+      </p>
+      <input type="button" value="ボタン" onclick="counter()">
+</body>
+
+<script>
+var not = 0;
+function counter(){
+not++;
+document.getElementById("press-button").innerHTML = not;
+}
+</script>
+</html>
