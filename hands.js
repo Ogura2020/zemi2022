@@ -4,6 +4,9 @@ const canvasCtx = canvasElement.getContext('2d');
 
 let i = 0;
 
+// ジェスチャーを検出したかのフラグ
+let isGestureDetected = false;
+
 const hands = new Hands({locateFile: (file) => {
   return `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`;
 }});
@@ -24,6 +27,14 @@ const camera = new Camera(videoElement, {
   height: 320
 });
 camera.start();
+
+const onGestureDetected = () => {
+  isGestureDetected = true;
+
+  setTimeout(() => {
+    isGestureDetected = false;
+  }, 1000);
+};
 
 function getHand(results) {
   canvasCtx.save();
@@ -49,13 +60,17 @@ function getHand(results) {
         console.log("✌🏻");
       }
 
-      if (Math.abs(hand1[4].x - hand1[8].x) < 0.02 && Math.abs(hand1[4].y - hand1[8].y) < 0.027){
+      // 「ジェスチャーが見つかっていない状態か」を条件に加える
+      if (!isGestureDetected && Math.abs(hand1[4].x - hand1[8].x) < 0.02 && Math.abs(hand1[4].y - hand1[8].y) < 0.027){
         function counter(){
           i--;
           document.getElementById("press-button").innerHTML = i;
         }
         counter();
+
         console.log("👌");
+
+        onGestureDetected();
       }
 
       if (Math.abs(hand1[4].x - hand1[12].x) < 0.02 && Math.abs(hand1[4].y - hand1[12].y) < 0.02 && Math.abs(hand1[4].x - hand1[16].x) < 0.02 && Math.abs(hand1[4].y - hand1[16].y) < 0.02){
