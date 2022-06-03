@@ -3,6 +3,7 @@ const canvasElement = document.getElementsByClassName('output_canvas')[0];
 const canvasCtx = canvasElement.getContext('2d');
 
 let i = 0;
+let isGestureDetected = false;  // ジェスチャーを検出したかのフラグ
 
 const hands = new Hands({locateFile: (file) => {
   return `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`;
@@ -25,6 +26,13 @@ const camera = new Camera(videoElement, {
 });
 camera.start();
 
+const onGestureDetected = () => {
+  isGestureDetected = true;
+  setTimeout(() => {
+    isGestureDetected = false;
+  }, 1000);
+};
+
 function getHand(results) {
   canvasCtx.save();
   //canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
@@ -40,40 +48,37 @@ function getHand(results) {
       const hand2 = results.multiHandLandmarks[1];
       //console.log(hand1[8].y,hand1[6].y);
 
-      if ((hand1[6].y < hand1[8].y > hand1[7].y) && (hand1[10].y < hand1[12].y > hand1[11].y) && (0.02 < Math.abs(hand1[8].x - hand1[12].x) > 0.07)) {
+      if (!isGestureDetected && (hand1[6].y < hand1[8].y > hand1[7].y) && (hand1[10].y < hand1[12].y > hand1[11].y) && (0.02 < Math.abs(hand1[8].x - hand1[12].x) > 0.07)) {
         function counter(){
           i++;
           document.getElementById("press-button").innerHTML = i;
         }
         counter();
         console.log("✌🏻");
+        onGestureDetected();
       }
 
-      if (Math.abs(hand1[4].x - hand1[8].x) < 0.02 && Math.abs(hand1[4].y - hand1[8].y) < 0.027){
+      if (!isGestureDetected && Math.abs(hand1[4].x - hand1[8].x) < 0.02 && Math.abs(hand1[4].y - hand1[8].y) < 0.027){
         function counter(){
           i--;
           document.getElementById("press-button").innerHTML = i;
         }
         counter();
         console.log("👌");
+        onGestureDetected();
       }
 
-      if (Math.abs(hand1[4].x - hand1[12].x) < 0.02 && Math.abs(hand1[4].y - hand1[12].y) < 0.02 && Math.abs(hand1[4].x - hand1[16].x) < 0.02 && Math.abs(hand1[4].y - hand1[16].y) < 0.02){
+      if (!isGestureDetected && Math.abs(hand1[4].x - hand1[12].x) < 0.02 && Math.abs(hand1[4].y - hand1[12].y) < 0.02 && Math.abs(hand1[4].x - hand1[16].x) < 0.02 && Math.abs(hand1[4].y - hand1[16].y) < 0.02){
         function counter(){
-          document.getElementById("press-button").innerHTML = 0;
+          document.getElementById("press-button").innerHTML = i = 0;
         }
         counter();
         console.log("🤘");
+        onGestureDetected();
       }
       /*
       if ((hand1[6].y < hand1[8].y > hand1[7].y) && (hand1[10].y < hand1[12].y > hand1[11].y) && (0.03 < Math.abs(hand1[8].x - hand1[12].x) > 0.07) && i == 0) {
         i = 1;
-        console.log("１回");
-      } else if ((hand1[6].y < hand1[8].y > hand1[7].y) && (hand1[10].y < hand1[12].y > hand1[11].y) && (0.03 < Math.abs(hand1[8].x - hand1[12].x) > 0.07) && i == 1){
-        i = 2;
-        console.log("2回");
-      } else if ((hand1[6].y < hand1[8].y > hand1[7].y) && (hand1[10].y < hand1[12].y > hand1[11].y) && (0.03 < Math.abs(hand1[8].x - hand1[12].x) > 0.07) ) {
-        i = 0;
         console.log("👌",i);
         //location.href ='test/demo用.html';
         //alert("👌");
@@ -90,9 +95,3 @@ function getHand(results) {
     }
   }
 }
-
-/*
-canvasCtx.beginPath();
-canvasCtx.fillStyle = '#ff6';
-canvasCtx.fillRect(0, 0, canvasElement.width, canvasElement.height);
-*/
