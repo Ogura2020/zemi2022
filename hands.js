@@ -47,7 +47,7 @@ function getHand(results) {
       const hand1 = results.multiHandLandmarks[0] ;
       const hand2 = results.multiHandLandmarks[1];
       //console.log(hand1[8].y,hand1[6].y);
-
+/*
       if (!isGestureDetected && (hand1[6].y < hand1[8].y > hand1[7].y) && (hand1[10].y < hand1[12].y > hand1[11].y) && (0.02 < Math.abs(hand1[8].x - hand1[12].x) > 0.07)) {
         function counter(){
           i++;
@@ -57,8 +57,18 @@ function getHand(results) {
         console.log("✌🏻");
         onGestureDetected();
       }
+*/
+      if (!isGestureDetected && (hand1[12].y > hand1[10].y) && (hand1[16].y > hand1[14].y) && (hand1[8].y < hand1[10].y) && (hand1[20].y < hand1[10].y) && (hand1[4].y < hand1[11].y)) {
+        function counter(){
+          i++;
+          document.getElementById("press-button").innerHTML = i;
+        }
+        counter();
+        console.log("🤘");
+        onGestureDetected();
+      }
 
-      if (!isGestureDetected && Math.abs(hand1[4].x - hand1[8].x) < 0.02 && Math.abs(hand1[4].y - hand1[8].y) < 0.027){
+      if (!isGestureDetected && Math.abs(hand1[4].x - hand1[8].x) < 0.03 && Math.abs(hand1[4].y - hand1[8].y) < 0.03){
         function counter(){
           i--;
           document.getElementById("press-button").innerHTML = i;
@@ -68,12 +78,12 @@ function getHand(results) {
         onGestureDetected();
       }
 
-      if (!isGestureDetected && Math.abs(hand1[4].x - hand1[12].x) < 0.02 && Math.abs(hand1[4].y - hand1[12].y) < 0.02 && Math.abs(hand1[4].x - hand1[16].x) < 0.02 && Math.abs(hand1[4].y - hand1[16].y) < 0.02){
+      if (!isGestureDetected && Math.abs(hand1[4].x - hand1[12].x) < 0.05 && Math.abs(hand1[4].y - hand1[12].y) < 0.05 && Math.abs(hand1[4].x - hand1[16].x) < 0.05 && Math.abs(hand1[4].y - hand1[16].y) < 0.05){
         function counter(){
           document.getElementById("press-button").innerHTML = i = 0;
         }
         counter();
-        console.log("🤘");
+        console.log("🤟");
         onGestureDetected();
       }
       /*
