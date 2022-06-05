@@ -9,21 +9,30 @@
   <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
   <!--
     <script src="https://cdn.jsdelivr.net/npm/p5@1.4.1/lib/p5.js"></script>
-    <link href="/mediapipe.css" rel="stylesheet" >
   -->
+
+  <link href="/mediapipe.css" rel="stylesheet" >
+
 
 </head>
 
 <body>
   <div class="container">
     <video class="input_video" style="-webkit-transform: scaleX(-1);"></video>
-    <canvas class="output_canvas" width="540px" height="320px" ></canvas>
+    <canvas class="output_canvas" width="768px" height="432px" ></canvas>
     <script src="/hands.js"></script>
   </div>
 
+  <ul>
+    <img id="img1" src="image/maloik_sign_sdw.png" alt="メロイックサイン" width="200" height="200">
+    <img id="img2" src="image/ok_sign_sdw.png" alt="OKサイン" width="200" height="200">
+    <img id="img3" src="image/kitune_sdw.png" alt="コルナサイン" width="200" height="200">
+  </ul>
+
+ <!--
   <p>
     <h1 id="press-button">0</h1>
-
-    </p>
+  </p>
+ -->
 </body>
 </html>
