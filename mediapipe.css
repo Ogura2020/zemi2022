@@ -1,3 +1,18 @@
 body{
-    background: rgb(151, 151, 151);
+    background: #fffffb;
+}
+
+.output_canvas {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 5px;
+}
+
+ul {
+    list-style-type: none;
+    display: flex; 
+    padding:  15px;   
+    justify-content: space-evenly;
+    flex-wrap: wrap; 
 }
