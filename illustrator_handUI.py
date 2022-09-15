@@ -73,89 +73,53 @@ def camera():
     #image.flags.writeable = True
     #image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
     
+    landmark_list = ['WRIST', 'THUMP_CMC', 'THUMB_MCP', 'THUMB_IP', 'THUMB_TIP', 'INDEX_FINGER_MCP', 'INDEX_FINGER_PIP', 'INDEX_FINGER_DIP', 'INDEX_FINGER_TIP', 'MIDDLE_FINGER_MCP', 'MIDDLE_FINGER_PIP', 'MIDDLE_FINGER_DIP', 'MIDDLE_FINGER_TIP', 'RING_FINGER_MCP', 'RING_FINGER_PIP', 'RING_FINGER_DIP', 'RING_FINGER_TIP', 'PINKY_MCP', 'PINKY_PIP', 'PINKY_DIP', 'PINKY_TIP']
+    yuX = []
+    yuY = []
     if results.multi_hand_landmarks:
       for hand_landmarks in results.multi_hand_landmarks:
-        mp_drawing.draw_landmarks(
-            image, hand_landmarks, mp_hands.HAND_CONNECTIONS)
+       for i in range(21):
+         yuX.append(hand_landmarks.landmark[i].x * image_width)
+         yuY.append(hand_landmarks.landmark[i].y * image_height)
+         #print(yuX[0],yuY[0])
       X=(hand_landmarks.landmark[mp_hands.HandLandmark.INDEX_FINGER_TIP].x * image_width)
       Y=(hand_landmarks.landmark[mp_hands.HandLandmark.INDEX_FINGER_TIP].y * image_height)
 
-      oX1 =hand_landmarks.landmark[mp_hands.HandLandmark.THUMB_TIP].x * image_width
-      oY1 =hand_landmarks.landmark[mp_hands.HandLandmark.THUMB_TIP].y * image_height
-      oX4 =hand_landmarks.landmark[mp_hands.HandLandmark.THUMB_MCP].x * image_width
-      oY4 =hand_landmarks.landmark[mp_hands.HandLandmark.THUMB_MCP].y * image_height
-
-      hiX1=hand_landmarks.landmark[mp_hands.HandLandmark.INDEX_FINGER_TIP].x * image_width
-      hiY1=hand_landmarks.landmark[mp_hands.HandLandmark.INDEX_FINGER_TIP].y * image_height
-      hiX2=hand_landmarks.landmark[mp_hands.HandLandmark.INDEX_FINGER_DIP].x * image_width
-      hiY2=hand_landmarks.landmark[mp_hands.HandLandmark.INDEX_FINGER_DIP].y * image_height
-      hiX3=hand_landmarks.landmark[mp_hands.HandLandmark.INDEX_FINGER_PIP].x * image_width
-      hiY3=hand_landmarks.landmark[mp_hands.HandLandmark.INDEX_FINGER_PIP].y * image_height
-      hiX4=hand_landmarks.landmark[mp_hands.HandLandmark.INDEX_FINGER_MCP].x * image_width
-      hiY4=hand_landmarks.landmark[mp_hands.HandLandmark.INDEX_FINGER_MCP].y * image_height
-
-      naX1=hand_landmarks.landmark[mp_hands.HandLandmark.MIDDLE_FINGER_TIP].x * image_width
-      naY1=hand_landmarks.landmark[mp_hands.HandLandmark.MIDDLE_FINGER_TIP].y * image_height
-      naX2=hand_landmarks.landmark[mp_hands.HandLandmark.MIDDLE_FINGER_DIP].x * image_width
-      naY2=hand_landmarks.landmark[mp_hands.HandLandmark.MIDDLE_FINGER_DIP].y * image_height
-      naX3=hand_landmarks.landmark[mp_hands.HandLandmark.MIDDLE_FINGER_PIP].x * image_width
-      naY3=hand_landmarks.landmark[mp_hands.HandLandmark.MIDDLE_FINGER_PIP].y * image_height
-      naX4=hand_landmarks.landmark[mp_hands.HandLandmark.MIDDLE_FINGER_MCP].x * image_width
-      naY4=hand_landmarks.landmark[mp_hands.HandLandmark.MIDDLE_FINGER_MCP].y * image_height
-
-      kuX1=hand_landmarks.landmark[mp_hands.HandLandmark.RING_FINGER_TIP].x * image_width
-      kuY1=hand_landmarks.landmark[mp_hands.HandLandmark.RING_FINGER_TIP].y * image_height
-      kuX2=hand_landmarks.landmark[mp_hands.HandLandmark.RING_FINGER_DIP].x * image_width
-      kuY2=hand_landmarks.landmark[mp_hands.HandLandmark.RING_FINGER_DIP].y * image_height
-      kuX3=hand_landmarks.landmark[mp_hands.HandLandmark.RING_FINGER_PIP].x * image_width
-      kuY3=hand_landmarks.landmark[mp_hands.HandLandmark.RING_FINGER_PIP].y * image_height
-      kuX4=hand_landmarks.landmark[mp_hands.HandLandmark.RING_FINGER_MCP].x * image_width
-      kuY4=hand_landmarks.landmark[mp_hands.HandLandmark.RING_FINGER_MCP].y * image_height
-
-      koX1=hand_landmarks.landmark[mp_hands.HandLandmark.PINKY_TIP].x * image_width
-      koY1=hand_landmarks.landmark[mp_hands.HandLandmark.PINKY_TIP].y * image_height
-      koX2=hand_landmarks.landmark[mp_hands.HandLandmark.PINKY_DIP].x * image_width
-      koY2=hand_landmarks.landmark[mp_hands.HandLandmark.PINKY_DIP].y * image_height
-      koX3=hand_landmarks.landmark[mp_hands.HandLandmark.PINKY_PIP].x * image_width
-      koY3=hand_landmarks.landmark[mp_hands.HandLandmark.PINKY_PIP].y * image_height
-      koX4=hand_landmarks.landmark[mp_hands.HandLandmark.PINKY_MCP].x * image_width
-      koY4=hand_landmarks.landmark[mp_hands.HandLandmark.PINKY_MCP].y * image_height
-
-      if abs(oX1-hiX1)<14 and abs(oY1-hiY1)<14 and naY1 < hiY4:
+      if abs(yuX[4]-yuX[8])<14 and abs(yuY[4]-yuY[8])<14 and yuY[12] < yuY[8]:
         pg.hotkey("ctrl","s")
         time.sleep(1)
         print("保存")
-      if abs(oX1-naX1)<15 and abs(oY1-naY1)<15 and abs(oX1-hiX1)<15 and abs(oY1-hiY1)<15 and kuY1 > kuY4 and koY1 > koY4:
+      if abs(yuX[4]-yuX[12])<15 and abs(yuY[4]-yuY[12])<15 and abs(yuX[4]-yuX[8])<15 and abs(yuY[4]-yuY[8])<15 and yuY[16] > yuY[13] and yuY[20] > yuY[17]:
         pg.hotkey("p")
         time.sleep(1)
         print("ペンツール")
-      if hiY1 < hiY3 and hiY1 < naY1 and hiY1 < kuY1 and hiY1 < koY1 and abs(oX1-naX1)<15:
+      if yuY[8] < yuY[6] and yuY[8] < yuY[12] and yuY[8] < yuY[16] and yuY[8] < yuY[20] and abs(yuX[4]-yuX[12])<15:
         #pg.hotkey("v")
         time.sleep(1)
         print("選択ツール")
-      if hiY1 < hiY3 and hiY1 < naY1 and hiY1 < kuY1 and hiY1 < koY1 and np.linalg.norm(oX1-naX3) > 25:
+      if yuY[8] < yuY[6] and yuY[8] < yuY[12] and yuY[8] < yuY[16] and yuY[8] < yuY[20] and np.linalg.norm(yuX[4]-yuX[10]) > 25:
         #pg.hotkey("v")
         time.sleep(1)
         print("ダイレクト選択ツール")
-      if hiY1 > hiY3 and naY1 > naY3 and kuY1 > kuY3 and oY1 < hiY3 and koY1 < naY3:
+      if yuY[8] > yuY[6] and yuY[12] > yuY[10] and yuY[16] > yuY[14] and yuY[4] < yuY[6] and yuY[20] < yuY[10]:
         #pg.hotkey("t")
         time.sleep(1)
         print("文字ツール")
         
-      if hiX1 > hiX3 and naX1 > naX3 and kuX1 > kuX3 and koX1 > koX3 and oY1 < hiY3:
+      if yuX[8] > yuX[6] and yuX[12] > yuX[10] and yuX[16] > yuX[14] and yuX[20] > yuX[18] and yuY[4] < yuY[6]:
         #pg.hotkey("t")
         time.sleep(1)
         print("前面に移動1")
-      if hiX1 < hiX3 and naX1 < naX3 and kuX1 < kuX3 and koX1 < koX3 and oY1 < hiY3:
+      if yuX[8] < yuX[6] and yuX[12] < yuX[10] and yuX[16] < yuX[14] and yuX[20] < yuX[18] and yuY[4] < yuY[6]:
         time.sleep(1)
         print("前面に移動2")
 
-      if abs(oX1-koX1)<14 and abs(oY1-koY1)<14:
+      if abs(yuX[4]-yuX[20])<14 and abs(yuY[4]-yuY[20])<14:
         pg.hotkey("ctrl","shift","z")
         time.sleep(1)
         print("元に戻す")
 
-      if abs(oX1-naX1)<12 and abs(oY1-naY1)<12 and abs(oX1-kuX1)<12 and abs(oY1-kuY1)<12:
+      if abs(yuX[4]-yuX[12])<12 and abs(yuY[4]-yuY[12])<12 and abs(yuX[4]-yuX[16])<12 and abs(yuY[4]-yuY[16])<12:
         t_n = time.time()
         times_n += 1
         time.sleep(0.1)
