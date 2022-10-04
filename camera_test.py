@@ -9,7 +9,7 @@ import mediapipe as mp
 import numpy as np      #いらないかも！確認する！
 import threading
 
-i=0
+image_index=0
 root = tk.Tk()
 root.geometry("400x300")
 root.resizable(False, False)  #ウィンドウサイズ固定
@@ -26,6 +26,7 @@ event = threading.Event()
 mp_hands = mp.solutions.hands
 cap = cv2.VideoCapture(0)
 def camera():
+ global image_index
  with mp_hands.Hands(
     min_detection_confidence=0.5,
     min_tracking_confidence=0.5) as hands:
@@ -46,7 +47,7 @@ def camera():
     
     yuX = []
     yuY = []
-    if results.multi_hand_landmarks:
+    if results.multi_hand_landmarks and image_index==1:
       for hand_landmarks in results.multi_hand_landmarks:
        for i in range(21):
          yuX.append(hand_landmarks.landmark[i].x * image_width)
@@ -63,21 +64,21 @@ def camera():
 
 img =[ImageTk.PhotoImage(file="image/button1.png"),ImageTk.PhotoImage(file="image/button2.png")]
 def camera_btn():
-  global i
-  i= (i+1) % len(img)
-  btn1 = tk.Button(root, image=img[i], bg="#ECE2DB", width=65, height=65, bd=0, relief="sunken", activebackground="#ECE2DB", command=camera_btn)
+  global image_index
+  image_index= (image_index+1) % len(img)
+  btn1 = tk.Button(root, image=img[image_index], bg="#ECE2DB", width=65, height=65, bd=0, relief="sunken", activebackground="#ECE2DB", command=camera_btn)
   canvas.create_window(255,150,window=btn1)  #255,60
-  print("押された！",i)
-  if i==1:
+  print("押された！",image_index)
+  if image_index==1:
    thread_camera = threading.Thread(target=camera)
    thread_camera.start()
    print("On")
-  elif i==0:
+  elif image_index==0:
     print("OFF")
-    cap.release()
-btn1 = tk.Button(root, image=img[i], bg="#ECE2DB", width=65,height=65, bd=0, relief="sunken", activebackground="#ECE2DB", command=camera_btn)
+    #cap.release()
+btn1 = tk.Button(root, image=img[image_index], bg="#ECE2DB", width=65,height=65, bd=0, relief="sunken", activebackground="#ECE2DB", command=camera_btn)
 canvas.create_window(255,150,window=btn1)  #255,60
-print(i)
+print(image_index)
 '''
 mp_hands = mp.solutions.hands
 
