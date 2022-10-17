@@ -64,30 +64,30 @@ def camera():
       Y=(hand_landmarks.landmark[mp_hands.HandLandmark.INDEX_FINGER_TIP].y * image_height)
       
       if abs(yuX[4]-yuX[8])<14 and abs(yuY[4]-yuY[8])<14 and yuY[12] < yuY[8]:
-        #pg.hotkey("ctrl","s")
-        time.sleep(1)
+        pg.hotkey("ctrl","s")
         print("保存")
         text['text'] = '保存しました！'
+        time.sleep(1)
       if abs(yuX[4]-yuX[12])<15 and abs(yuY[4]-yuY[12])<15 and abs(yuX[4]-yuX[8])<15 and abs(yuY[4]-yuY[8])<15 and yuY[16] > yuY[13] and yuY[20] > yuY[17]:
         pg.hotkey("p")
-        time.sleep(1)
         print("ペンツール")
+        time.sleep(1)
         text['text'] = 'ペンツール'
       if yuY[8] < yuY[6] and yuY[8] < yuY[12] and yuY[8] < yuY[16] and yuY[18] < yuY[20] and abs(yuX[4]-yuX[12])<13:
         pg.hotkey("v")
-        time.sleep(1)
         print("選択ツール")
         text['text'] = '選択ツール'
-      if yuY[8] < yuY[6] and yuY[8] < yuY[12] and yuY[8] < yuY[16] and yuY[18] < yuY[20] and 15 < np.linalg.norm(yuX[4]-yuX[10]) > 25:
-        pg.hotkey("v")
         time.sleep(1)
+      if yuY[8] < yuY[6] and yuY[8] < yuY[12] and yuY[8] < yuY[16] and yuY[18] < yuY[20] and 15 < np.linalg.norm(yuX[4]-yuX[10]) > 25:
+        pg.hotkey("a")
         print("ダイレクト選択ツール")
         text['text'] = 'ダイレクト選択ツール'
-      if yuX[8] > yuX[6] and yuX[12] > yuY[10] and 10 < np.linalg.norm(yuX[4]-yuX[10]) > 20 and yuX[8] > yuX[16] and yuX[12] > yuX[16]:
-        pg.hotkey("t")
         time.sleep(1)
+      if yuX[8] > yuX[6] and yuX[12] > yuX[10] and yuX[8] > yuX[16] and yuX[12] > yuX[16] and yuY[12] > yuY[4]:
+        pg.hotkey("t")
         print("文字ツール")
         text['text'] = '文字ツール'
+        time.sleep(1)
       #if yuX[8] < yuX[6] and yuX[12] < yuX[10] and yuX[16] < yuX[14] and yuX[20] < yuX[18] and yuY[4] < yuY[0]:
         #pg.hotkey("shift","]")
       #  time.sleep(1)
@@ -98,24 +98,24 @@ def camera():
       #  print("背面に移動")
       if  yuY[8] < yuY[6] and yuY[20] < yuY[18] and yuY[8] < yuY[12] and yuY[8] < yuY[16] and yuY[20] < yuY[12] and yuY[20] < yuY[16] and abs(yuX[4]-yuX[12])<13:
         pg.hotkey("ctrl","z")
-        time.sleep(1)
         print("取り消し")
         text['text'] = '取り消しました！'
+        time.sleep(1)
       if  yuY[8] < yuY[6] and yuY[20] < yuY[18] and yuY[8] < yuY[12] and yuY[8] < yuY[16] and yuY[20] < yuY[12] and yuY[20] < yuY[16] and 10 < np.linalg.norm(yuX[4]-yuX[10]) > 25:
         pg.hotkey("ctrl","shift","z")
-        time.sleep(1)
         print("元に戻す")
         text['text'] = 'もとに戻しました！'
-      if 20 < np.linalg.norm(yuY[4]-yuY[8]) > 25 and abs(yuX[8]-yuX[12]) < 10 and abs(yuX[12]-yuX[16]) < 10 and abs(yuX[16]-yuX[20]) < 10:
-        pg.hotkey("ctrl","c")
         time.sleep(1)
+      if 30 < np.linalg.norm(yuY[4]-yuY[8]) < 55 and abs(yuX[8]-yuX[12]) < 10 and abs(yuX[12]-yuX[16]) < 10 and abs(yuX[16]-yuX[20]) < 10 and yuY[8] < yuY[4]:
+        pg.hotkey("ctrl","c")
         print("コピー")
         text['text'] = 'コピーしました！'
+        time.sleep(1)
       if yuY[8] < yuY[6] and yuY[12] < yuY[10] and abs(yuX[4]-yuX[14]) < 14 and yuY[16] > yuY[14] and yuY[20] > yuY[18] and 5 < np.linalg.norm(yuX[8]-yuX[12]) > 20:
         pg.hotkey("ctrl","v")
-        time.sleep(1)
         print("貼り付け")
         text['text'] = '貼り付けました！'
+        time.sleep(1)
 
       '''
       if abs(yuX[4]-yuX[20])<14 and abs(yuY[4]-yuY[20])<14:
@@ -131,7 +131,7 @@ def camera_btn():
   global image_index
   image_index= (image_index+1) % len(img)
   btn1 = tk.Button(root, image=img[image_index], bg="#ECE2DB", width=65, height=65, bd=0, relief="sunken", activebackground="#ECE2DB", command=camera_btn)
-  canvas.create_window(255,150,window=btn1)  #255,60
+  canvas.create_window(310,60,window=btn1)  #255,60
   print("押された！",image_index)
   if image_index==1:
    thread_camera = threading.Thread(target=camera)
@@ -141,11 +141,11 @@ def camera_btn():
     print("OFF")
     #cap.release()
 btn1 = tk.Button(root, image=img[image_index], bg="#ECE2DB", width=65,height=65, bd=0, relief="sunken", activebackground="#ECE2DB", command=camera_btn)
-canvas.create_window(255,150,window=btn1)  #255,60
+canvas.create_window(310,60,window=btn1)  #255,60
 print(image_index)
 
 text = tk.Message(root, text="○○を使用しました", width=200)
-text.place(x = 30, y = 135) #30,45
+text.place(x = 30, y = 45) #30,45
 
 def delete_window():
   cap.release()
