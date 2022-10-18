@@ -14,6 +14,7 @@ root.geometry("400x300")
 root.resizable(False, False)  #ウィンドウサイズ固定
 root.title("HAND UI")
 root.configure(bg='#ECE2DB')
+root.iconphoto(False, ImageTk.PhotoImage(file="image/peace.png"))
 root.attributes("-topmost", True)  #ウィンドウを常に一番前にする
 root.option_add('*font',("Yu Gothic UI Semibold",10))
 
