@@ -10,16 +10,18 @@ import numpy as np   #いらないかも！確認する！
  
 image_index=0
 root = tk.Tk()
-root.geometry("400x300")
+root.geometry("400x900")
 root.resizable(False, False)  #ウィンドウサイズ固定
 root.title("HAND UI")
 root.configure(bg='#ECE2DB')
-root.iconphoto(False, ImageTk.PhotoImage(file="image/peace.png"))
+root.iconphoto(False, ImageTk.PhotoImage(file="image/icon2.png"))
 root.attributes("-topmost", True)  #ウィンドウを常に一番前にする
-root.option_add('*font',("Yu Gothic UI Semibold",10))
+root.option_add('*font',("Yu Gothic UI Semibold",12))
 
-canvas=tk.Canvas(root, bg='#1b1b1b')
+canvas=tk.Canvas(root, bg='#ECE2DB', width=400,height=1000)
 canvas.pack()
+photo1=tk.PhotoImage(file='image/gesture.png')
+canvas.create_image(195,500,image=photo1)
 
 mp_drawing = mp.solutions.drawing_utils
 mp_hands = mp.solutions.hands
@@ -69,22 +71,22 @@ def camera():
         print("保存")
         text['text'] = '保存しました！'
         time.sleep(1)
-      if abs(yuX[4]-yuX[12])<15 and abs(yuY[4]-yuY[12])<15 and abs(yuX[4]-yuX[8])<15 and abs(yuY[4]-yuY[8])<15 and yuY[16] > yuY[13] and yuY[20] > yuY[17]:
+      if abs(yuX[4]-yuX[12])<16 and abs(yuY[4]-yuY[12])<16 and abs(yuX[4]-yuX[8])<16 and abs(yuY[4]-yuY[8])<16 and yuY[16] > yuY[14] and yuY[20] > yuY[18]:
         pg.hotkey("p")
         print("ペンツール")
         time.sleep(1)
         text['text'] = 'ペンツール'
-      if yuY[8] < yuY[6] and yuY[8] < yuY[12] and yuY[8] < yuY[16] and yuY[18] < yuY[20] and abs(yuX[4]-yuX[12])<13:
+      if yuY[8] < yuY[6] and yuY[5] < yuY[12] and yuY[5] < yuY[16] and yuY[5] < yuY[20] and abs(yuX[4]-yuX[12])<13:
         pg.hotkey("v")
         print("選択ツール")
         text['text'] = '選択ツール'
         time.sleep(1)
-      if yuY[8] < yuY[6] and yuY[8] < yuY[12] and yuY[8] < yuY[16] and yuY[18] < yuY[20] and 15 < np.linalg.norm(yuX[4]-yuX[10]) > 25:
+      if yuY[8] < yuY[6] and yuY[4] < yuY[12] and yuY[4] < yuY[16] and yuY[4] < yuY[20] and 15 < np.linalg.norm(yuX[4]-yuX[8]) > 25 and abs(yuY[12]-yuY[16]) < 15 and abs(yuY[16]-yuY[20]) < 15:
         pg.hotkey("a")
         print("ダイレクト選択ツール")
         text['text'] = 'ダイレクト選択ツール'
         time.sleep(1)
-      if yuX[8] > yuX[6] and yuX[12] > yuX[10] and yuX[8] > yuX[16] and yuX[12] > yuX[16] and yuY[12] > yuY[4]:
+      if yuX[8] > yuX[6] and yuX[12] > yuX[10] and yuX[8] > yuX[16] and yuX[8] > yuX[20] and yuX[12] > yuX[16] and yuX[12] > yuX[20] and yuY[3] < yuY[5]:
         pg.hotkey("t")
         print("文字ツール")
         text['text'] = '文字ツール'
@@ -117,6 +119,14 @@ def camera():
         print("貼り付け")
         text['text'] = '貼り付けました！'
         time.sleep(1)
+      if yuY[4] > yuY[16] and abs(yuY[4]-yuY[13])<15 and abs(yuX[4]-yuX[13])<15 and yuY[4] > yuY[8] and yuY[4] > yuY[12] and yuY[4] > yuY[16] and yuY[4] > yuY[20]:
+        pg.keyDown("alt")
+        print("拡大・縮小")
+        text['text'] = '拡大・縮小'
+        time.sleep(1)
+      else :
+        pg.keyUp("alt")
+        #print("解除")
 
       '''
       if abs(yuX[4]-yuX[20])<14 and abs(yuY[4]-yuY[20])<14:
@@ -127,12 +137,13 @@ def camera():
 
       #camera_button.config(state = "normal")
 
+#カメラ切り替えボタン
 img =[ImageTk.PhotoImage(file="image/button1.png"),ImageTk.PhotoImage(file="image/button2.png")]
 def camera_btn():
   global image_index
   image_index= (image_index+1) % len(img)
-  btn1 = tk.Button(root, image=img[image_index], bg="#ECE2DB", width=65, height=65, bd=0, relief="sunken", activebackground="#ECE2DB", command=camera_btn)
-  canvas.create_window(310,60,window=btn1)  #255,60
+  btn1 = tk.Button(root, image=img[image_index], bg="#ECE2DB", width=90, height=90, bd=0, relief="sunken", activebackground="#ECE2DB", command=camera_btn)
+  canvas.create_window(295,70,window=btn1)
   print("押された！",image_index)
   if image_index==1:
    thread_camera = threading.Thread(target=camera)
@@ -141,12 +152,12 @@ def camera_btn():
   elif image_index==0:
     print("OFF")
     #cap.release()
-btn1 = tk.Button(root, image=img[image_index], bg="#ECE2DB", width=65,height=65, bd=0, relief="sunken", activebackground="#ECE2DB", command=camera_btn)
-canvas.create_window(310,60,window=btn1)  #255,60
+btn1 = tk.Button(root, image=img[image_index], bg="#ECE2DB", width=90,height=90, bd=0, relief="sunken", activebackground="#ECE2DB", command=camera_btn)
+canvas.create_window(295,70,window=btn1)  
 print(image_index)
 
-text = tk.Message(root, text="○○を使用しました", width=200)
-text.place(x = 30, y = 45) #30,45
+text = tk.Message(root, text="○○を使用しました", width=200,bg="#ffffff")
+text.place(x = 40, y = 55) #30,45
 
 def delete_window():
   cap.release()
