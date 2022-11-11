@@ -1,0 +1,30 @@
+body {
+  all: initial;
+  background-color: #EFE6E0;
+}
+
+.Container {
+    display: grid;
+    grid-template-columns: minmax(160px, 0.4fr) 2fr;
+    align-items: start;
+}
+
+.aside{
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  text-align: center;
+  background-color: #fefefe;
+}
+
+
+.Main{
+  height: 100vh;
+  align-self: center;
+  justify-self: center;
+  background-color: #EFE6E0;
+}
+
+ul {
+  list-style-type: none;
+}
