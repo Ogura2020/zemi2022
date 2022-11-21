@@ -38,7 +38,6 @@ li {
   padding-bottom:10px;
 }
 
-
 .Main{
   display: flex;
   flex-direction: column;
@@ -47,12 +46,97 @@ li {
 }
 
 video {
+  display: flex;
   border-radius: 50px;
-  width: 1000px;
+  width: 100%;
+  max-width: 1000px; 
+  justify-self: center;
+  margin-left: auto;
+  margin-right: auto;
   margin-top: 50px;
   margin-bottom: 50px;
 }
 
 p {
   color: black;
+}
+
+.use{
+  display: flex;
+  flex-direction: column;
+}
+
+.box {
+  display: flex;
+  flex-direction: column;
+  max-width: 1000px;
+  margin: 20px auto;
+
+  background-color: #fefefe;
+  border-radius: 50px;
+}
+
+@media (min-width: 481px) and (max-width: 1200px) {
+  .Container {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  .aside{
+    position: sticky;
+    top: 0;
+    height: 90px;
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    background-color: #fefefe;
+  }
+  img#logo{
+    padding: 10px;
+    margin-left: 20px;
+  }
+  ul {
+    display: flex;
+    list-style: none;
+    list-style-type: none;
+    margin-right: 20px;
+  }
+  li {
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+  }
+}
+
+/*
+ * Smart Phone
+ * ブラウザの幅が 480px 以下の時にスタイルが適応されるようにしましょう
+ */
+@media (max-width: 480px) {
+  .Container {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  .aside{
+    position: sticky;
+    top: 0;
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    background-color: #fefefe;
+  }
+  img#logo{
+    padding: 10px;
+    margin-left: 10px;
+  }
+  ul {
+    display: flex;
+    list-style: none;
+    list-style-type: none;
+    margin-right: 20px;
+  }
+  li {
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+  }
+  
 }
