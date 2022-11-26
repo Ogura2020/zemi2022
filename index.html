@@ -14,37 +14,74 @@
 <body>
   <div class="Container">
     <div class="aside">
-      <img src="image/logo.png" alt="ロゴマーク" id="logo">
+      <a href="#Top"><img src="image/logo.png" alt="ロゴマーク" id="logo"></a>
       <nav class="Nav">
         <ul>
-          <li>HandUIとは？</li>
-          <li>使い方</li>
-          <li>ダウンロード</li>
+          <li><a href="#About">HandUIとは？</a></li>
+          <li><a href="#Use">使い方</a></li>
+          <li><a href="#Dl">ダウンロード</a></li>
         </ul>
       </nav>
     </div>
-    <main class="Main">
+    <main class="Main" id="Top">
       <video src="/pythonデモ動画_高画質.mp4" loop autoplay muted></video>
-      <div class="about">
-        <h3>HandUIとは？</h3>
+      <div class="about" id="About">
+        <h2>HandUIとは？</h2>
         <p>ここにテキストが入ります</p>
       </div>
-      <div class="use">
-        <h3>使い方</h3>
+      <div class="use" id="Use">
+        <h2>使い方</h2>
         <div class="box">
-          <h4>1.HandUIをダウンロード</h4>
-          <p>ここにテキストが入りますここにテキストが入ります</p>
+          <div class="text">
+            <h3>1.HandUIをダウンロード</h3>
+            <p>まずはHandUIをダウンロードしましょう。<br/>
+            ダウンロードが完了したらアプリを開きます。</p>
+          </div>
+          <img src="image/test.png" id="use" width="200px" height="200px">
         </div>
         <div class="box">
-          <h4>2.カメラボタンを押してスタート</h4>
+          <div class="text">
+            <h3>2.ボタンを押してスタート</h3>
+            <p>ボタンを押すとカメラが起動し、ハンドサインを認識するようになります。<br/>
+            illustratorも起動しましょう</p>
+          </div>
+          <img src="image/test.png" id="use" width="200px" height="200px">
+        </div>
+        <div class="box">
+          <div class="text">
+            <h3>3.カメラに向かってハンドサイン</h3>
+            <p>アプリに表示されているハンドサインをすると下に書かれている動作をします。<br/>
+            使いたいツールや行いたい動作のハンドサインをしてみましょう。<br/>
+            行った動作、行っている動作は左上に表示されます。</p>
+          </div>
+          <img src="image/test.png" id="use" width="200px" height="200px">
+        </div>
+        <div class="box">
+          <div class="text">
+            <h3>4.ボタンを押すとカメラがストップ</h3>
+            <p>もう一度ボタンを押すとカメラがストップします。<br/>
+            アプリを止めたいときに押して下さい。<br/><br/>
+            ×ボタンを押すことでアプリを終了することができます。</p>
+          </div>
+          <img src="image/test.png" id="use" width="200px" height="200px">
         </div>
       </div>
-      <div class="dl">
-        <h3>ダウンロード</h3>
+      <div class="dl" id="Dl">
+        <h2>ダウンロード</h2>
+        <div class="box">
+          <div class="text">
+            <h3>2.ボタンを押してスタート</h3>
+            <p>ボタンを押すとカメラが起動し、ハンドサインを認識するようになります。<br/>
+            illustratorも起動しましょう</p>
+          </div>
+          <img src="image/test.png" id="use" width="200px" height="200px">
+        </div>
+        <div class="dl_btn">
+          <a href="/HandUI_illustrator.zip" download>HandUIをダウンロード</a>
+        </div>
       </div>
     </main>
   </div>
 
-  <!--<a href="/Hand_UI.zip" download>ダウンロード</a>-->
 </body>
 </html>
