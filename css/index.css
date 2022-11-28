@@ -26,6 +26,7 @@ body {
 
 a{
   text-decoration:none;
+  color: #F70B48;
 }
 
 img#logo{
@@ -63,14 +64,35 @@ p {
   color: black;
 }
 
+.about{
+  display: flex;
+  flex-direction: column;
+}
+
+.setumei{
+  display: flex;
+  align-items: center; 
+  gap: 50px;
+}
+.setu_text{
+  display: flex;
+  flex-direction: column;
+  row-gap: 50px;
+}
+img#apuri{
+  width: auto;
+  max-height: 100%;
+  filter: drop-shadow(2px 5px 5px #aaa);
+}
+
 .use{
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: stretch;
   gap: 20px;
-  margin-left: 10%;
-  margin-right: 10%;
+  margin-left: 5%;
+  margin-right: 5%;
   margin-top: 100px;
   margin-bottom: 100px;
 }
@@ -100,8 +122,20 @@ img#use{
 .dl{
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  gap: 20px;
+  margin-left: 5%;
+  margin-right: 5%;
   margin-top: 100px;
   margin-bottom: 100px;
+}
+
+.dl_box {
+  display: flex;
+  flex-direction: column;
+  background-color: #fefefe;
+  border-radius: 30px;
 }
 
 .dl_btn{
@@ -113,13 +147,14 @@ img#use{
   text-align: center;
   margin: auto;
   transition: .4s;
-  border: solid 4px #F70B48;
+  border: solid 3px #F70B48;
 }
 .dl_btn:hover{
   background: #fefefe;
-  color: white;
+  color: #F70B48;
 }
 
+/*tablet*/
 @media (min-width: 481px) and (max-width: 1000px) {
   .Container {
     display: grid;
@@ -151,10 +186,7 @@ img#use{
   }
 }
 
-/*
- * Smart Phone
- * ブラウザの幅が 480px 以下の時にスタイルが適応されるようにしましょう
- */
+/*Smart Phone*/
 @media (max-width: 480px) {
   .Container {
     display: grid;
