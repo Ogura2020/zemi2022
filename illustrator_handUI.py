@@ -1,6 +1,5 @@
 import tkinter as tk
-from PIL import Image,ImageTk
-import tkinter.ttk as ttk
+from PIL import ImageTk
 import pyautogui as pg
 import time
 import cv2
@@ -11,16 +10,17 @@ import numpy as np
 image_index=0
 root = tk.Tk()
 root.geometry("400x900")
-root.resizable(False, False)  #ウィンドウサイズ固定
-root.title("HAND UI")
+root.minsize(400, 140)
+root.maxsize(400, 900)
+root.title("Hand UI")
 root.configure(bg='#ECE2DB')
-root.iconphoto(False, ImageTk.PhotoImage(file="image/icon2.png"))
+root.iconphoto(False, ImageTk.PhotoImage(file="icon2.png"))
 root.attributes("-topmost", True)  #ウィンドウを常に一番前にする
 root.option_add('*font',("Yu Gothic UI Semibold",12))
 
 canvas=tk.Canvas(root, bg='#ECE2DB', width=400,height=1000)
 canvas.pack()
-photo1=tk.PhotoImage(file='image/gesture.png')
+photo1=tk.PhotoImage(file='gesture.png')
 canvas.create_image(195,500,image=photo1)
 
 mp_hands = mp.solutions.hands
@@ -51,28 +51,32 @@ def camera():
          yuY.append(hand_landmarks.landmark[i].y * image_height)
          #print(hand_landmarks.landmark[4])
       
-      if abs(yuX[4]-yuX[8])<14 and abs(yuY[4]-yuY[8])<14 and yuY[12] < yuY[8]:
+      if abs(yuX[4]-yuX[8])<14 and abs(yuY[4]-yuY[8])<14 and yuY[12] < yuY[8] and yuY[16] < yuY[8] and yuY[20] < yuY[8]:
         pg.hotkey("ctrl","s")
         print("保存")
         text['text'] = '保存しました！'
         time.sleep(1)
-      if abs(yuX[4]-yuX[12])<16 and abs(yuY[4]-yuY[12])<16 and abs(yuX[4]-yuX[8])<16 and abs(yuY[4]-yuY[8])<16 and yuY[16] > yuY[14] and yuY[20] > yuY[18]:
-        pg.hotkey("p")
+      if abs(yuX[4]-yuX[12])<40 and abs(yuY[4]-yuY[12])<15 and abs(yuX[4]-yuX[8])<40 and abs(yuY[4]-yuY[8])<15 and yuY[16] > yuY[14] and yuY[20] > yuY[18]:
+        pg.press("p")
         print("ペンツール")
-        time.sleep(1)
         text['text'] = 'ペンツール'
-      if yuY[8] < yuY[6] and yuY[5] < yuY[12] and yuY[5] < yuY[16] and yuY[5] < yuY[20] and abs(yuX[4]-yuX[12])<13:
-        pg.hotkey("v")
+        time.sleep(1)
+      if yuY[8] < yuY[6] and yuY[4] < yuY[12] and yuY[4] < yuY[16] and yuY[4] < yuY[20] and abs(yuX[4]-yuX[12])<15:
+        pg.press("v")
         print("選択ツール")
         text['text'] = '選択ツール'
         time.sleep(1)
-      if yuY[8] < yuY[6] and yuY[4] < yuY[12] and yuY[4] < yuY[16] and yuY[4] < yuY[20] and 15 < np.linalg.norm(yuX[4]-yuX[8]) > 25 and abs(yuY[12]-yuY[16]) < 15 and abs(yuY[16]-yuY[20]) < 15:
-        pg.hotkey("a")
+      if yuY[8] < yuY[6] and yuY[4] < yuY[12] and yuY[4] < yuY[16] and yuY[4] < yuY[20] and 18 < np.linalg.norm(yuX[4]-yuX[8]) > 25 and abs(yuY[12]-yuY[16]) < 15 and abs(yuY[16]-yuY[20]) < 15:
+        pg.press("a")
         print("ダイレクト選択ツール")
         text['text'] = 'ダイレクト選択ツール'
         time.sleep(1)
       if yuX[8] > yuX[6] and yuX[12] > yuX[10] and yuX[8] > yuX[16] and yuX[8] > yuX[20] and yuX[12] > yuX[16] and yuX[12] > yuX[20] and yuY[3] < yuY[5]:
-        pg.hotkey("t")
+        pg.press("t")
+        print("文字ツール")
+        text['text'] = '文字ツール'
+        time.sleep(1)
+      elif yuX[8] < yuX[6] and yuX[12] < yuX[10] and yuX[8] < yuX[16] and yuX[8] < yuX[20] and yuX[12] < yuX[16] and yuX[12] < yuX[20] and yuY[3] < yuY[5]:
         print("文字ツール")
         text['text'] = '文字ツール'
         time.sleep(1)
@@ -105,24 +109,25 @@ def camera():
         pg.keyUp("alt")
         #print("解除")
 
-
 #カメラ切り替えボタン
-img =[ImageTk.PhotoImage(file="image/button1.png"),ImageTk.PhotoImage(file="image/button2.png")]
+img =[ImageTk.PhotoImage(file="button1.png"),ImageTk.PhotoImage(file="button2.png")]
 def camera_btn():
   global image_index
   image_index= (image_index+1) % len(img)
   btn1 = tk.Button(root, image=img[image_index], bg="#ECE2DB", width=90, height=90, bd=0, relief="sunken", activebackground="#ECE2DB", command=camera_btn)
-  canvas.create_window(295,70,window=btn1)
+  canvas.create_window(300,70,window=btn1)
   print("押された！",image_index)
   if image_index==1:
-   thread_camera = threading.Thread(target=camera)
-   thread_camera.start()
+   #thread_camera = threading.Thread(target=camera)
+   #thread_camera.start()
    print("On")
   elif image_index==0:
     print("OFF")
 btn1 = tk.Button(root, image=img[image_index], bg="#ECE2DB", width=90,height=90, bd=0, relief="sunken", activebackground="#ECE2DB", command=camera_btn)
-canvas.create_window(295,70,window=btn1)  
+canvas.create_window(300,70,window=btn1)  
 print(image_index)
+thread_camera = threading.Thread(target=camera)
+thread_camera.start()
 
 text = tk.Message(root, text="○○を使用しました", width=200,bg="#ffffff")
 text.place(x = 40, y = 55) #30,45
