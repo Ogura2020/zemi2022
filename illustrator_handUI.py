@@ -44,7 +44,8 @@ def camera():
     
     yuX = []
     yuY = []
-    if results.multi_hand_landmarks and image_index==1:
+    try:
+     if results.multi_hand_landmarks and image_index==1:
       for hand_landmarks in results.multi_hand_landmarks:
        for i in range(21):
          yuX.append(hand_landmarks.landmark[i].x * image_width)
@@ -109,6 +110,10 @@ def camera():
         pg.keyUp("alt")
         #print("解除")
 
+    except:
+      print("pyautoguiのエラーがでました")
+      time.sleep(1)
+
 #カメラ切り替えボタン
 img =[ImageTk.PhotoImage(file="button1.png"),ImageTk.PhotoImage(file="button2.png")]
 def camera_btn():
@@ -118,8 +123,6 @@ def camera_btn():
   canvas.create_window(300,70,window=btn1)
   print("押された！",image_index)
   if image_index==1:
-   #thread_camera = threading.Thread(target=camera)
-   #thread_camera.start()
    print("On")
   elif image_index==0:
     print("OFF")
