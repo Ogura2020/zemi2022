@@ -6,6 +6,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="slick/slick.css">
+  <link rel="stylesheet" href="slick/slick-theme.css">
   <link href="css/ress.css" rel="stylesheet">
   <link href="css/index.css" rel="stylesheet">
   <title>Hand_UI</title>
@@ -24,7 +26,10 @@
       </nav>
     </div>
     <main class="Main" id="Top">
-      <video src="/pythonデモ動画_高画質.mp4" loop autoplay muted></video>
+      <div class="douga">
+        <img src="image/logo.png" alt="ロゴマーク" id="top_logo">
+        <video src="/pythonデモ動画_高画質.mp4" loop autoplay muted></video>
+      </div>
       <div class="about" id="About">
         <h2>HandUIとは？</h2>
         <div class="setumei">
@@ -52,7 +57,7 @@
             <h3>1.HandUIをダウンロード</h3>
             <p>まずはHandUIを<a href="#Dl">ダウンロード</a>しましょう。<br/>
             ダウンロードが完了したらアプリをクリックして開きます。<br/><br/>
-            illustratorも起動しましょう。（Photoshopやクリップスタジオなどでも可）</p>
+            illustratorも起動しましょう。（PhotoshopやCLIP STUDIO PAINTなどでも可）</p>
           </div>
         </div>
         <div class="box">
@@ -76,7 +81,7 @@
             <h3>4.ボタンを押すとカメラがストップ</h3>
             <p>もう一度ボタンを押すとカメラがストップします。<br/>
             アプリを止めたいときに押して下さい。<br/><br/>
-            ×ボタンを押すことでアプリを終了することができます。</p>
+            ×ボタンを押すことでもアプリを終了することができます。</p>
           </div>
           <img src="image/use03.svg" id="use" width="200px" height="200px">
         </div>
@@ -84,24 +89,31 @@
       <div class="dl" id="Dl">
         <h2>ダウンロード</h2>
         <div class="dl_box">
-          <div class="text">
+          <div class="dl_text">
             <h3>1.ボタンを押してダウンロード</h3>
             <p>下のボタンからアプリをダウンロードしましょう。<br/>
             ※このアプリはWindowsのPCで使うことができます。<br/>
             ※Windows10以外での動作確認はしておりません。ご了承ください。</p>
             <a class="dl_btn" href="/HandUI_illustrator.zip" download>HandUIをダウンロード</a>
           </div>
-          <div class="text">
+          <div class="dl_text">
             <h3>2.ダウンロードができたら</h3>
             <p>ダウンロードファイルのHandUI_illustrator.zipというファイルを右クリック→
             すべて展開→HandUI_illustrator.exeをダブルクリックでアプリが開きます。
             <br/>
             下のようなものが表示されたら詳細情報→実行ボタンを押してください。
             </p>
-          </div>
-          <img src="image/dl01.png" id="use" width="300px" height="300px">
-          <div class="text">
-            <p>よく使う場合はアプリをデスクトップに移動させることをお勧めします。</p>
+            <div class="slider">
+              <div>
+                <img src="image/pen.png" id="use">
+              </div>
+              <div>
+                <img src="image/bang.png" id="use">
+              </div>
+              <div>
+                <img src="image/ok.png" id="use">
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -110,10 +122,19 @@
 
 <script src="js/smooth-scroll.polyfills.min.js"></script>
 
+<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="slick/slick.min.js"></script>
+
 <script>
-var scroll = new SmoothScroll('a[href*="#"]', {
-	speed: 1000
-});
+  var scroll = new SmoothScroll('a[href*="#"]', {
+	  speed: 1000
+  });
+
+  $(document).ready(function(){
+    $('.slider').slick({
+
+    });
+  });
 </script>
 
 </body>
