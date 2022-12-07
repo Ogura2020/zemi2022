@@ -27,8 +27,7 @@
     </div>
     <main class="Main" id="Top">
       <div class="douga">
-        <img src="image/logo.png" alt="ロゴマーク" id="top_logo">
-        <video src="/pythonデモ動画_高画質.mp4" loop autoplay muted></video>
+        <video src="/HandUI_otonasi.mp4" loop autoplay muted></video>
       </div>
       <div class="about" id="About">
         <h2>HandUIとは？</h2>
@@ -47,7 +46,7 @@
             座標でそれぞれのハンドサインを認識するようにしています。</p>
           </div>
         </div>
-        <p>ちょっとでも楽しく、ちょっとでも便利になればいいなと思って制作したので使ってもらえたら嬉しいです。
+        <p class="hitokoto">ちょっとでも楽しく、ちょっとでも便利になればいいなと思って制作したので使ってもらえたら嬉しいです!
         </p>
       </div>
       <div class="use" id="Use">
@@ -90,28 +89,31 @@
         <h2>ダウンロード</h2>
         <div class="dl_box">
           <div class="dl_text">
-            <h3>1.ボタンを押してダウンロード</h3>
             <p>下のボタンからアプリをダウンロードしましょう。<br/>
             ※このアプリはWindowsのPCで使うことができます。<br/>
             ※Windows10以外での動作確認はしておりません。ご了承ください。</p>
-            <a class="dl_btn" href="/HandUI_illustrator.zip" download>HandUIをダウンロード</a>
+            <div class="dl_text">
+              <a class="dl_btn" href="/HandUI.zip" download>HandUIをダウンロード</a>
+            </div>
           </div>
           <div class="dl_text">
-            <h3>2.ダウンロードができたら</h3>
             <p>ダウンロードファイルのHandUI_illustrator.zipというファイルを右クリック→
             すべて展開→HandUI_illustrator.exeをダブルクリックでアプリが開きます。
-            <br/>
-            下のようなものが表示されたら詳細情報→実行ボタンを押してください。
             </p>
+          </div>
+          <div class="dl_text">
             <div class="slider">
               <div>
-                <img src="image/pen.png" id="use">
+                <img src="image/dl_01.svg" id="use" width="500px" height="500px">
               </div>
               <div>
-                <img src="image/bang.png" id="use">
+                <img src="image/dl_02.svg" id="use" width="500px" height="500px">
               </div>
               <div>
-                <img src="image/ok.png" id="use">
+                <img src="image/dl_03.svg" id="use" width="500px" height="500px">
+              </div>
+              <div>
+                <img src="image/dl_04.svg" id="use" width="500px" height="500px">
               </div>
             </div>
           </div>
@@ -132,7 +134,8 @@
 
   $(document).ready(function(){
     $('.slider').slick({
-
+      infinite: false,
+      dots: true
     });
   });
 </script>
