@@ -8,8 +8,15 @@ body {
 
 .Container {
   display: grid;
-  grid-template-columns: minmax(160px, 0.35fr) 2fr;
+  grid-template-columns: minmax(160px, 0.35fr) minmax(0, 2fr);
   align-items: start;
+}
+
+h2{
+  padding-left: 30px;
+}
+h3{
+  padding-bottom: 10px;
 }
 
 .aside{
@@ -65,7 +72,7 @@ video {
   border-radius: 50px;
   width: 100%;
   margin-top: 50px;
-  margin-bottom: 50px;
+  margin-bottom: 70px;
 }
 
 p {
@@ -75,7 +82,7 @@ p {
 .about{
   display: flex;
   flex-direction: column;
-  gap: 50px;
+  gap: 25px;
 }
 
 .setumei{
@@ -93,6 +100,13 @@ img#apuri{
   max-height: 100%;
   filter: drop-shadow(2px 5px 5px #aaa);
 }
+.hitokoto{
+  margin-top: 50px;
+  color: #F70B48;
+  font-size: 22px;
+  font-weight: 700;
+  text-align: center;
+}
 
 .use{
   display: flex;
@@ -105,25 +119,18 @@ img#apuri{
   margin-top: 80px;
 
 }
-
 .box {
   display: flex;
   justify-content: space-between;
   background-color: #fefefe;
   border-radius: 30px;
 }
-
-h3{
-  padding-bottom: 10px;
-}
-
 .text{
   display: flex;
   flex-direction: column;
   padding: 2rem;
   padding-top: 1.5em;
 }
-
 img#use{
   padding: 1.5rem;
 }
@@ -139,23 +146,20 @@ img#use{
   margin-top: 80px;
   margin-bottom: 100px;
 }
-
 .dl_box {
   display: flex;
   flex-direction: column;
   background-color: #fefefe;
   border-radius: 30px;
-
 }
-
 .dl_text{
   display: flex;
   flex-direction: column;
   padding: 2rem;
-  padding-top: 1.5em;
-  gap: 50px;
+  padding-bottom: 10px;
+  gap: 10px;
+  text-align: center;
 }
-
 .dl_btn{
   border-radius: 100px;
   padding: 20px;
@@ -171,10 +175,19 @@ img#use{
   background: #fefefe;
   color: #F70B48;
 }
-
 .slider{
-  
+  margin-left: 100px;
+  margin-right: 100px;
 }
+.slider img{
+  width: 100%;
+}
+.slick-prev::before,
+.slick-next::before{
+  color:#000;
+  font-size:30px;
+}
+
 /*tablet*/
 @media (min-width: 481px) and (max-width: 1000px) {
   .Container {
